@@ -1,12 +1,17 @@
+@font-face {
+  font-family: 'Roboto';
+  src: url('roboto.eot'); /* IE9 Compat Modes */
+  src: url('roboto.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('roboto.woff') format('woff'), /* Modern Browsers */
+  url('roboto.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('roboto.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
 html {
     margin: 0;
     padding: 0;
     display: block;
     width: 100%;
 }
-
-
-
 
 .row2 {
   display: flex;
@@ -34,7 +39,6 @@ html {
 }​
 
 .tablo {
-  font-family: Roboto;
   text-align: center;
   margin-top: 20px;
 }
@@ -174,8 +178,6 @@ body {
   border-bottom-style: solid; 
   border-bottom-color: #1C6EA4;
 }
-
-
 @media (min-width: 600px) and (max-width: 700px) {
 
   #create {
