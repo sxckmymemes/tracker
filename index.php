@@ -5,33 +5,11 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="css/style.css">
 	<script src="js/jquery-3.4.1.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<link rel="shortcut icon" href="img/logo_r.png" type="image/x-icon">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" type="text/css" href="fonts/roboto.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 </head>
 <body style="font-family: Roboto; width: 100%; overflow-x: hidden; background: #FEECCE;">
-
-	<script>
-		var i = 0;
-		window.onload = ()=>{var el = document.getElementById('scroll');}
-		var lab = document.createElement("label");
-		var inp = document.createElement("input");
-
-		inp.setAttribute('type', 'checkbox');
-		inp.setAttribute('name', 'check');
-		inp.setAttribute('id', 'check');
-
-	</script>
-	
-	<script>
-	    if ( window.history.replaceState ) {
-	        window.history.replaceState( null, null, window.location.href );
-	    }
-	</script> 
-
 	<div id="header" class="row">
 		<div class="col-xs-0 col-sm-0 col-md-6 col-lg-6"></div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"></div>
@@ -104,17 +82,25 @@
 					mysqli_select_db($link, "compstore");
 					$result = mysqli_query($link, "SELECT id, name, company, token FROM tovars");
 					while ($row = mysqli_fetch_array($result, MYSQLI_NUM)) {
-printf("<label value=%s style=padding-top:15px;><input type=radio id=test value=%s name=bar style=margin-right:15px;>Id: %s Название: %s Компания: %s Токен: %s</label><br>", $row[0], $row[0], $row[0], $row[1], $row[2], $row[3],);
-}
+						printf("<label value=%s style=padding-top:15px;><input class=check type=radio value=%s name=bar style=margin-right:15px;>Id: %s Название: %s Компания: %s Токен: %s</label><br>", $row[0], $row[0], $row[0], $row[1], $row[2], $row[3]);
+					}
 					mysqli_free_result($result);
 					mysqli_close($link);
 					?>
+					<script type="text/javascript">
+						$(document).ready(function () {
+							$(".check").change(function () {
+							    var val = $('.check:checked').val();
+							    $(".in").attr("value", val);
+							});
+							});
+					</script>
 				</div>
 				<div class="icons col-xs-12 col-sm-12 col-md-12 col-lg-1">
 					<div class="row" style="background: #CCA668;">
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-12" style="text-align: center; padding-top: 5px; padding-bottom: 5px;"><a href="#" onclick="document.getElementById('find').submit(); return false;"><input type="submit" value="Поиск" class="superbutton2" ></a></div>
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-12" style="text-align: center; padding-top: 5px; padding-bottom: 5px;"><a href="#" onclick="document.getElementById('light').submit(); return false;"><!-- <img src="img/volume.png" style="width: 60px; height: 60px;"> --></a></div>
-						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-12" style="text-align: center; padding-top: 5px; padding-bottom: 5px;"><a href="#" onclick="document.getElementById('sound').submit(); return false;"></a></div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-12" style="text-align: center; padding-top: 5px; padding-bottom: 5px;">
+							<input type="button" value="Поиск" class="superbutton2" onclick="document.getElementById('find').submit(); return false;">
+						</div>
 					</div>
 				</div>
 				</div>
@@ -122,30 +108,10 @@ printf("<label value=%s style=padding-top:15px;><input type=radio id=test value=
 		</div>
 	</div>
 
-<form method="GET" action="sample.php" id="find" style="display: none;">
+<form method="GET" action="" id="find" style="display: none;">
 	<input type="text" value="find" name="command">
-	<input type="text" name="ID" value="">
-	<input type="submit" value="Click me!">
+	<input type="text" class="in" name="ID" value="">
 </form>
-
-
-
-<form method="GET" action="sample.php" id="light" style="display: none;">
-	<input type="text" value="sound" name="command">
-	<input type="text" name="ID" value="">
-	<input type="submit" value="Click me!">
-</form>
-
-
-<form method="GET" action="sample.php" id="sound" style="display: none;">
-	<input type="text" value="light" name="command">
-	<input type="hidden" name="ID" value="">
-	<input type="submit" value="Click me!">
-</form>
-<!-- <?php
-$id = 1;
-?> -->
-<!-- <a href="http://localhost/storehouse_master-master/sample.php?command=find&ID= php echo &id  Profile</a> -->
 
 </body>
 </html>
@@ -227,7 +193,6 @@ header ('Location: index.php');
 // закрываем подключение
 mysqli_close($link);
 ?>
-
 
 										<!-- remove_element -->
 <?php
